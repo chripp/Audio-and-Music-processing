@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="audio-and-music-processing-solution-description">Audio and Music Processing Solution Description</h1>
+<h2 id="onset-detection"><code>Onset Detection</code></h2>
+<p>This uses the <code>SuperFlux</code> algorithm, which of course is an extension to the spectral difference based <code>LogFiltSpecFlux (LFSF)</code> algorithm. This algorithm has <code>7 hyperparameters</code> ($w_1, ..., w_5, \delta$ and the size of the maximum-filter $s_{mf}$) which we optimiized using <code>Bayes Search</code> on the provided set of extra onset annotations. We chose this search procedure over grid-search, as in our experience it leads to better results with fewer parameter evaluations. To implement this, we wrapped the detection script in a simple <code>sklearn</code> estimator class, defined the <code>score as in evaluate.py</code> and then used the parameter search provided by <code>scikit-optimize</code>. This search would usually be intended for cross validation, but by manually defining a single fold with every datapoint in the validation set we can use it for our intended purposes. As the parameter choice $s_{mf}=1$ was found to be optimal, our implementation actually chose to do <code>LSFS rather than SuperFlux</code> (a maximum-filter with size one does not change the data).</p>
+<h2 id="tempo-estimation"><code>Tempo Estimation</code></h2>
+<p>We used simple <code>Autocorrelation</code> to find the most prevalent periodicity in the <code>onset detection function (ODF)</code>. Of the tempos in the interval <code>[60-200]bpm</code> the one with the <code>highest autocorrelation</code> is chosen as our estimate. Further, we also return <code>half the found tempo</code> as our second estimate, simply because it worked well in practise.</p>
+<p>Our first attempt at tempo estimation was based on <code>TempoCNN</code> as described in the original paper. Sadly, this approach did not work out, as the model only ever got a <code>Tempo p-score of around 0.3</code>. We believe this to be due to a <code>lack of training data</code>. To alleviate the data shortage, we experimented with <code>three data augmentation strategies</code>. First, as described in the paper, we implemented <code>random interpolation and clipping</code> along the time axis of the spectrogram while adjusting the tempo to match. Second, we used the probabilities often provided in the ground truth tempo annotations to <code>randomize which tempo would be used as the target</code>, to better reflect the annotation results. Lastly, because at this point we suspected the issue to be a <code>lack of coverage</code> over the [30-286]bpm range used in the paper, we tried &quot;lowering the resolution&quot;. Concretely, instead of rounding to the nearest bpm, we would round to e.g. the nearest multiple of 2 in the hopes of <code>increasing the number of samples per classification bin</code>. Unfortunately, all this did not come to fruition and was <code>replaced by the simpler algorithm described above</code>. One thing that may have saved this approach would have been testing different model architectures, but as this can get quite time consuming we decided against it.</p>
+<h2 id="beat-detection"><code>Beat Detection</code></h2>
+<p>As both our onset and tempo detection algorithms worked quite well, we chose to try the <code>simplest algorithm imaginable</code> first and go from there. That is, we generate a <code>pulse train</code> from an <code>estimated tempo</code> and then use <code>cross-correlation</code> with the ODF to find the <code>phase (start)</code> of this pulse train. Finally, we go through each pulse and either pick the <code>onset nearest to the pulse middle</code> within some threshold or the <code>pulse middle itself</code> as a beat. Of course, as we estaimate <code>two tempos</code>, we do this with both of them and then <code>compare</code> their cross-correlation at their corresponding phases with each other. This comparison was based on the idea that a tempo with <code>twice the bpm</code> should have close to <code>twice the cross-correlation</code> to actually be better, as a doubled tempo has twice as many peaks in the pulse train and can therefore gather twice as many values from the ODF.</p>
+<p>For choosing good values for both the width of each pulse in the pulse train and the multiplier for the cross-correlation comparison we again employed <code>Bayes Search</code> as described above. The final value for the <code>multiplier</code> was close to <code>1 instead of 2</code> as we had expected and the score also plateaued in that region. This leads us to believe that the best choice is actually to <code>always pick our higher bpm tempo estimate</code>, which is the one for which autocorrelation was the highest.</p>
+<p>The estimates generated using this approach immediately put us at the top of the online ranking, so we decided to just stick with this method.</p>
+<h2 id="usage"><code>Usage</code></h2>
+<p>To handle dependencies we used an anaconda environment. The file <code>env.yml</code> should be enough to create the <code>music</code> environment we used. Should there still be problems, then use the file <code>music_env.yml</code> as it is a direct export of our environment.</p>
+<p>We used the given template for implementing our algorithms, so the file can be used quite similarly. The only thing that changed is the need to specify the needed hyperparameters. The following shows the command with the best hyperparameter choices found by Bayes Search:</p>
+<pre class="hljs"><code><div>$ conda activate music
+$ python detector.py train train.json 1 3 4 3 11 0.01556 0.08216 7 1.3
+$ python evaluate.py train train.json
+Onsets F-score: 0.7419
+Tempo p-score: 0.7134
+Beats F-score: 0.6317
+</div></code></pre>
+<p>The test predictions were generated using the following command:</p>
+<pre class="hljs"><code><div>$ python detector.py test final_predictions.json 1 3 4 3 11 0.01556 0.08216 7 1.3
+</div></code></pre>
+<h2 id="results"><code>Results</code></h2>
+<p>Our submission acchieved the following scores on the test data:</p>
+<pre class="hljs"><code><div>Onsets F-score: 0.758
+Tempo p-score: 0.816
+Beats F-score: 0.654
+</div></code></pre>
+
+</body>
+</html>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$', '$']]}, messageStyle: "none" });</script>
