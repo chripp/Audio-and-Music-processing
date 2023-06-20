@@ -9,9 +9,9 @@ This uses the `SuperFlux` algorithm, which of course is an extension to the spec
 `Tempo Estimation`
 -----------------
 
-We used simple `Autocorrelation` to find the most prevalent periodicity in the `onset detection function (ODF)`. Of the tempos in the interval `[60-200]bpm` the one with the `highest autocorrelation` is chosen as our estimate. Further, we also return `half the found tempo` as our second estimate, simply because it worked well in practise.
+Our first attempt at tempo estimation was based on `TempoCNN` as described in the original paper. Sadly, this approach did not work out, as the model only ever got a `p-score of around 0.3`. We believe this to be due to a `lack of training data`. To alleviate the data shortage, we experimented with `three data augmentation strategies`. First, as described in the paper, we implemented `random interpolation and clipping` along the time axis of the spectrogram while adjusting the tempo to match. Second, we used the probabilities often provided in the ground truth tempo annotations to `randomize which tempo would be used as the target`, to better reflect the annotation results. Lastly, because at this point we suspected the issue to be a `lack of coverage` over the [30-286]bpm range used in the paper, we tried "lowering the resolution". Concretely, instead of rounding to the nearest bpm, we would round to e.g. the nearest multiple of 2 in the hopes of `increasing the number of samples per classification bin`. Unfortunately, all this did not come to fruition and was `replaced by the simpler algorithm described below`. One thing that may have saved this approach would have been testing different model architectures, but as this can get quite time consuming we decided against it.
 
-Our first attempt at tempo estimation was based on `TempoCNN` as described in the original paper. Sadly, this approach did not work out, as the model only ever got a `Tempo p-score of around 0.3`. We believe this to be due to a `lack of training data`. To alleviate the data shortage, we experimented with `three data augmentation strategies`. First, as described in the paper, we implemented `random interpolation and clipping` along the time axis of the spectrogram while adjusting the tempo to match. Second, we used the probabilities often provided in the ground truth tempo annotations to `randomize which tempo would be used as the target`, to better reflect the annotation results. Lastly, because at this point we suspected the issue to be a `lack of coverage` over the [30-286]bpm range used in the paper, we tried "lowering the resolution". Concretely, instead of rounding to the nearest bpm, we would round to e.g. the nearest multiple of 2 in the hopes of `increasing the number of samples per classification bin`. Unfortunately, all this did not come to fruition and was `replaced by the simpler algorithm described above`. One thing that may have saved this approach would have been testing different model architectures, but as this can get quite time consuming we decided against it.
+Ultimately, we used simple `Autocorrelation` to find the most prevalent periodicity in the `onset detection function (ODF)`. Of the tempos in the interval `[60-200]bpm` the one with the `highest autocorrelation` is chosen as our estimate. Further, we also return `half the found tempo` as our second estimate, simply because it worked well in practise.
 
 `Beat Detection`
 ----------------
@@ -21,6 +21,13 @@ As both our onset and tempo detection algorithms worked quite well, we chose to 
 For choosing good values for both the width of each pulse in the pulse train and the multiplier for the cross-correlation comparison we again employed `Bayes Search` as described above. The final value for the `multiplier` was close to `1 instead of 2` as we had expected and the score also plateaued in that region. This leads us to believe that the best choice is actually to `always pick our higher bpm tempo estimate`, which is the one for which autocorrelation was the highest.
 
 The estimates generated using this approach immediately put us at the top of the online ranking, so we decided to just stick with this method.
+
+`Code`
+------
+
+Throughout development we usually began by implementing our ideas in a jupyter notebook with little regard for readability and then tranferred the code to `detector.py` if the idea worked out. Therefore, all of our algorithms used for the final predictions are fully implemented in `detector.py`. However, things we only did once, like Bayes Search for the hyperparameters, we did not bother cleaning up and they remain in their jupyter notebooks.
+
+The code for TempoCNN and its training is also included in this submission to show our work, but it is not used anywhere due to the reasons stated above.
 
 `Usage`
 -------
